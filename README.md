@@ -1,3 +1,12 @@
+---
+
+<h2><a id="agradecimientos"></a>Créditos y Fork</h2>
+
+Street District utiliza como base y fuente de inspiración la arquitectura y mecánicas físicas avanzadas de **haxball-curve-bot-v2** creado por Bugra Murat.
+
+[![GitHub Fork](https://img.shields.io/badge/Fork%20de-bugramurat%2Fhaxball--curve--bot--v2-24292e?style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117)](https://github.com/bugramurat/haxball-curve-bot-v2)
+
+---
 
 <div align="center">
 <img width="400" height="300" alt="Logo-SD" src="https://github.com/user-attachments/assets/ed6f27c1-a5d7-4c97-abbe-69cdb4a4b29b" />
