@@ -1,5 +1,8 @@
-<div align="center">
 
+<div align="center">
+<img width="599" height="403" alt="Logo-SD" src="https://github.com/user-attachments/assets/ed6f27c1-a5d7-4c97-abbe-69cdb4a4b29b" />
+<div align="center">
+<div align="center">
 <h1>🐺 Street District</h1>
 Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
 
