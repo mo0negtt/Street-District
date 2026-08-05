@@ -4,7 +4,7 @@
 <div align="center">
 <h1>🐺 Street District</h1>
 Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
-
+<p align="center">
 ---
 
 <h2><a id="agradecimientos"></a>Créditos y Fork</h2>
@@ -15,7 +15,6 @@ Street District utiliza como base y fuente de inspiración la arquitectura y mec
 
 ---
 
-<p align="center">
   🇪🇸 Español
 </p>
 
