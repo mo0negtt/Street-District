@@ -1,3 +1,10 @@
+<div align="center">
+<img width="400" height="300" alt="Logo-SD" src="https://github.com/user-attachments/assets/ed6f27c1-a5d7-4c97-abbe-69cdb4a4b29b" />
+<div align="center">
+<div align="center">
+<h1>🐺 Street District</h1>
+Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
+
 ---
 
 <h2><a id="agradecimientos"></a>Créditos y Fork</h2>
@@ -7,13 +14,6 @@ Street District utiliza como base y fuente de inspiración la arquitectura y mec
 [![GitHub Fork](https://img.shields.io/badge/Fork%20de-bugramurat%2Fhaxball--curve--bot--v2-24292e?style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117)](https://github.com/bugramurat/haxball-curve-bot-v2)
 
 ---
-
-<div align="center">
-<img width="400" height="300" alt="Logo-SD" src="https://github.com/user-attachments/assets/ed6f27c1-a5d7-4c97-abbe-69cdb4a4b29b" />
-<div align="center">
-<div align="center">
-<h1>🐺 Street District</h1>
-Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
 
 <p align="center">
   🇪🇸 Español
