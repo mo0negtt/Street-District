@@ -101,6 +101,8 @@ El bot soporta prefijos para hablar en privado y comandos de gestión completos.
    ```bash
    pm2 start sd-host.js --name street-district -- TU_TOKEN
 
+5. **Orden de Declaraciones:** Cuidado con el hoisting[cite: 1]. `const` y `let` a nivel de módulo deben declararse **antes** de ser usados en lógicas de inicialización (`ReferenceError: Cannot access 'X' before initialization`)[cite: 1].
+
 <div align="center">
 <br/>
 
