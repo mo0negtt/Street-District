@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>🐺 Street District</h1>
-### Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
+Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
 
 <p align="center">
   🇪🇸 Español
