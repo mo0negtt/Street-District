@@ -90,13 +90,6 @@ El bot soporta prefijos para hablar en privado y comandos de gestión completos.
 
 5. **Orden de Declaraciones:** Cuidado con el hoisting[cite: 1]. `const` y `let` a nivel de módulo deben declararse **antes** de ser usados en lógicas de inicialización (`ReferenceError: Cannot access 'X' before initialization`)[cite: 1].
 
-### 🎨 Convenciones de Estilo (Street District)
-- **Idioma:** Todo el código, variables mixtas y avisos en **Español**[cite: 1].
-- **Tipografías:** Usamos unicode generado por funciones (`mono()` y `fraktur()`) para estética matemática/elegante en el chat[cite: 1]. No transcribir a mano[cite: 1].
-- **Colores HaxBall:** Blanco (`0xffffff`) para principal, `colorMuted` (`0xB0B0B0`, estilo small) para separadores `- • • •`[cite: 1].
-- **Identidad de Marca:** El emoji **🐺** está reservado para cosas del core de la sala (Anuncios de fin de partido, Bienvenida, Líder de Manada)[cite: 1]. No lo uses para mensajes genéricos[cite: 1].
-</details>
-
 ---
 
 <div align="center">
