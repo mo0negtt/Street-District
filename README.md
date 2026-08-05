@@ -9,10 +9,10 @@ Host headless y comunidad de HaxBall Futsal (Chile 🇨🇱)
 
 <br/>
 
-[![Version](https://img.shields.io/badge/version-1.0.0-00d4ff?style=for-the-badge&labelColor=545F73)]()
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white&labelColor=545F73)]()
+[![Version](https://img.shields.io/badge/version-1.0.0-2F3140?style=for-the-badge&labelColor=545F73)]()
+[![Node.js](https://img.shields.io/badge/Node.js-2F3140?style=for-the-badge&logo=nodedotjs&logoColor=white&labelColor=545F73)]()
 [![Chile](https://img.shields.io/badge/Host-Chile_🇨🇱-CE1126?style=for-the-badge&labelColor=545F73)]()
-[![License](https://img.shields.io/badge/license-MIT-00d4ff?style=for-the-badge&labelColor=545F73)]()
+[![License](https://img.shields.io/badge/license-MIT-2F3140?style=for-the-badge&labelColor=545F73)]()
 
 [**Acerca de**](#acerca) · [**Arquitectura y Funciones**](#arquitectura) · [**Comandos**](#comandos) · [**Instalación**](#instalacion) · [**Guía de Desarrollo**](#dev)
 
