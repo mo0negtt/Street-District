@@ -1,0 +1,18 @@
+{
+  "name": "sd-host",
+  "version": "1.0.0",
+  "main": "sd-host.js",
+  "scripts": {
+    "start": "node --env-file=.env sd-host.js"
+  },
+  "keywords": ["haxball", "headless", "bot", "futsal"],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "description": "Bot/host de sala de HaxBall (node-haxball) con mecánicas extra: curva, lob-shot, power recto, sprint/slide, gana-sigue, stats persistentes, sistema de admins/roles por auth, clanes y webhooks de Discord.",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "dependencies": {
+    "node-haxball": "^2.3.0"
+  }
+}
