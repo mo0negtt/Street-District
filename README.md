@@ -1,10 +1,10 @@
 <div align="center">
 
-<img width="169" height="169" alt="sd-host logo" src="./assets/logo.png" />
+<img width="599" height="403" alt="Logo-SD" src="https://github.com/user-attachments/assets/4c115b98-6ae8-4376-af66-6010458a139e" />
 
-# sd-host
+# Street District
 
-### HaxBall Futsal Host
+### HaxBall Host
 
 **Un host de HaxBall competitivo para futsal, construido sobre Node.js y `node-haxball`.**
 
@@ -34,14 +34,9 @@ Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles 
 
 ---
 
-> [!TIP]
-> **sd-host** está diseñado alrededor de una idea simple: mantener la experiencia de futsal rápida, competitiva y automatizada, sin depender de un framework ni de una arquitectura compleja.
+## 🐺 ¿Qué es Street District?
 
----
-
-## 🐺 ¿Qué es sd-host?
-
-**sd-host** es un host headless de [HaxBall](https://www.haxball.com/) orientado a partidas de **futsal 4v4**, desarrollado en Node.js sobre [`node-haxball`](https://github.com/wxyz-abcd/node-haxball).
+**sd-host** (*Street District*) es un host headless de [HaxBall](https://www.haxball.com/) orientado a partidas de **futsal 4v4**, desarrollado en Node.js sobre [`node-haxball`](https://github.com/wxyz-abcd/node-haxball).
 
 El proyecto funciona como un único script:
 
@@ -595,8 +590,8 @@ Los archivos de datos generados por el bot no deberían subirse al repositorio p
 ### 1. Clonar
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd sd-host
+git clone https://github.com/mo0negtt/Street-District
+cd Street-District-main
 ```
 
 ### 2. Instalar dependencias
@@ -763,10 +758,7 @@ Por eso el resultado final debe capturarse antes de llamar a `stopGame()`.
 * [x] 🧤 Detección de atajadas
 * [x] 🪵 Detección de palo
 * [x] 🎨 Avatares dinámicos
-* [ ] 🔧 Refactorización modular
-* [ ] 🧪 Sistema de tests
-* [ ] 📈 Métricas avanzadas
-* [ ] 🌐 Panel web de administración
+* [ ] 🌐 Panel web
 
 ---
 
@@ -780,16 +772,12 @@ Puedes utilizar, modificar y redistribuir el código siempre que las obras deriv
 
 <div align="center">
 
-## 🐺 sd-host
-
-**Futsal. Stats. Competition.**
+## 🐺 Street-District
 
 <br/>
 
-Hecho con ❤️ para HaxBall.
+🇵🇸❤️🇪🇭
 
 <br/>
-
-**© sd-host**
 
 </div>
