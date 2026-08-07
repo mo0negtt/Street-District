@@ -6,9 +6,10 @@
 
 ### HaxBall Host
 
-**Un host de HaxBall competitivo para futsal, construido sobre Node.js y `node-haxball`.**
+**Un host de HaxBall competitivo para futsal, construido sobre Node.js y `node-haxball`, basado originalmente en `haxball-curve-bot-v2`.**
 
 Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles · Discord
+
 
 <br/>
 
@@ -33,6 +34,18 @@ Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles 
 </div>
 
 ---
+
+## 🧬 Código base y atribuciones
+
+**Street District** utiliza como base el proyecto **[`haxball-curve-bot-v2`](https://github.com/bugramurat/haxball-curve-bot-v2)**, desarrollado originalmente por **[@bugramurat](https://github.com/bugramurat)**.
+
+A partir de esta base, el proyecto ha sido **ampliado, modificado y adaptado** para Street District, incorporando sistemas propios de gameplay, estadísticas, clanes, roles, administración, protección de sala, integración con Discord y otras funcionalidades específicas del host.
+
+> [!NOTE]
+> El código original y sus respectivos créditos pertenecen a sus autores. Street District mantiene esta atribución como reconocimiento a la base sobre la que se construyó el proyecto.
+>
+> **Código base:** [`bugramurat/haxball-curve-bot-v2`](https://github.com/bugramurat/haxball-curve-bot-v2)
+
 
 ## 🐺 ¿Qué es Street District?
 
@@ -772,7 +785,21 @@ Puedes utilizar, modificar y redistribuir el código siempre que las obras deriv
 
 <div align="center">
 
-## 🐺 Street-District
+## 🐺 Street District
+
+# ❤️ Credits
+
+Street District está construido a partir del código base de:
+
+**[`haxball-curve-bot-v2`](https://github.com/bugramurat/haxball-curve-bot-v2)**
+by **[@bugramurat](https://github.com/bugramurat)**
+
+El proyecto ha sido posteriormente modificado y extendido para crear la experiencia de **Street District**.
+
+<br/>
+
+> **Original project:** `bugramurat/haxball-curve-bot-v2`
+> **Current project:** `Street District`
 
 <br/>
 
