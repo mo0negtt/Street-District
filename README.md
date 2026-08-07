@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="599" height="403" alt="Logo-SD" src="https://github.com/user-attachments/assets/4c115b98-6ae8-4376-af66-6010458a139e" />
+<img width="300" height="200" alt="Logo-SD" src="https://github.com/user-attachments/assets/4c115b98-6ae8-4376-af66-6010458a139e" />
 
 # Street District
 
