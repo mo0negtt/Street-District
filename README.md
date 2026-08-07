@@ -9,7 +9,6 @@
 **Un host de HaxBall competitivo para futsal, construido sobre Node.js y `node-haxball`, basado originalmente en `haxball-curve-bot-v2`.**
 
 Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles · Discord
-
 <br/>
 
 <p>
