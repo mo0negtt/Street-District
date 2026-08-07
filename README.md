@@ -785,8 +785,6 @@ Puedes utilizar, modificar y redistribuir el código siempre que las obras deriv
 
 <div align="center">
 
-## 🐺 Street District
-
 # ❤️ Credits
 
 Street District está construido a partir del código base de:
