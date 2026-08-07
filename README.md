@@ -10,7 +10,6 @@
 
 Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles · Discord
 
-
 <br/>
 
 <p>
