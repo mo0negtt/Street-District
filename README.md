@@ -1,101 +1,795 @@
-# 🐺 sd-host
+<div align="center">
 
-Bot/host de sala de [HaxBall](https://www.haxball.com/) para modo futsal, sobre
-[`node-haxball`](https://github.com/wxyz-abcd/node-haxball). Todo en un solo
-archivo (`sd-host.js`), sin build step ni framework.
+<img width="169" height="169" alt="sd-host logo" src="./assets/logo.png" />
 
-## Qué trae
+# sd-host
 
-- **Gana sigue**: el equipo que gana se queda, entra el siguiente de la cola.
-- **Mecánicas de tiro**: curva, lob-shot y power recto, cada una con su barra
-  de carga.
-- **Sprint / slide**, travesaño real, detección de palo y de atajadas.
-- **Stats persistentes por cuenta** (goles, asistencias, ID de jugador
-  permanente) que sobreviven a un reinicio del bot.
-- **Clanes**: fundalos al llegar a cierto puntaje, con invitación, chat propio
-  (`tc <mensaje>`) y ranking (`!top clan`).
-- **Admins y roles por auth**, editables en un `.json` mientras el bot corre
-  (sin reiniciar la sala).
-- **Webhooks de Discord**: aviso al abrir la sala, resultado de cada partido
-  con el replay `.hbr2` adjunto, y llamado de admin desde el chat.
-- Anti-spam, anti-AFK, bloqueo de cambio de equipo manual, banner de fin de
-  partido con posesión y goleadores.
+### HaxBall Futsal Host
 
-## Requisitos
+**Un host de HaxBall competitivo para futsal, construido sobre Node.js y `node-haxball`.**
 
-- Node.js **20.6 o superior** (usa `--env-file`, nativo desde esa versión —
-  no hace falta instalar `dotenv`).
-- Un [headless token](https://www.haxball.com/headlesstoken) de HaxBall.
+Sistema de partidas · Mecánicas avanzadas · Estadísticas · Clanes · Roles · Discord
 
-## Instalación
+<br/>
 
-```bash
-git clone <este-repo>
-cd sd-host
-npm install
-cp .env.example .env      # completá lo que quieras usar (todo es opcional)
-cp admins.json.example admins.json   # opcional, para arrancar con un admin ya cargado
+<p>
+  🇪🇸 Español
+</p>
+
+[![Node.js](https://img.shields.io/badge/Node.js-20.6%2B-339933?style=for-the-badge\&logo=node.js\&logoColor=white\&labelColor=0d1117)](https://nodejs.org/)
+[![HaxBall](https://img.shields.io/badge/HaxBall-Headless-ffffff?style=for-the-badge\&logoColor=white\&labelColor=0d1117)](https://www.haxball.com/)
+[![node-haxball](https://img.shields.io/badge/node--haxball-2.x-7289da?style=for-the-badge\&labelColor=0d1117)](https://github.com/wxyz-abcd/node-haxball)
+[![License](https://img.shields.io/badge/license-GPL--3.0-blue?style=for-the-badge\&labelColor=0d1117)](LICENSE)
+
+<br/>
+
+**[⚽ Características](#-características)** ·
+**[📊 Estadísticas](#-estadísticas)** ·
+**[🐺 Clanes](#-clanes)** ·
+**[👑 Roles](#-roles-y-administración)** ·
+**[💬 Discord](#-discord)** ·
+**[🚀 Instalación](#-instalación)**
+
+</div>
+
+---
+
+> [!TIP]
+> **sd-host** está diseñado alrededor de una idea simple: mantener la experiencia de futsal rápida, competitiva y automatizada, sin depender de un framework ni de una arquitectura compleja.
+
+---
+
+## 🐺 ¿Qué es sd-host?
+
+**sd-host** es un host headless de [HaxBall](https://www.haxball.com/) orientado a partidas de **futsal 4v4**, desarrollado en Node.js sobre [`node-haxball`](https://github.com/wxyz-abcd/node-haxball).
+
+El proyecto funciona como un único script:
+
+```text
+sd-host.js
 ```
 
-## Correrlo
+No utiliza:
+
+* ❌ Framework
+* ❌ Build step
+* ❌ Frontend
+* ❌ Base de datos externa
+
+En su lugar, utiliza archivos JSON locales para mantener los datos persistentes de los jugadores, clanes, roles y administradores.
+
+---
+
+# ✨ Características
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### ⚽ Gameplay
+
+* 🏆 **Gana Sigue**
+* 🌀 Curva
+* 🏹 Lob-shot
+* 💥 Power recto
+* 🏃 Sprint / slide
+* 🥅 Travesaño dinámico
+* 🪵 Detección de palo
+* 🧤 Detección de atajadas
+* 🎯 Gol de media cancha
+* 🔥 Doblete / hat-trick
+* ⚽ Autogoles
+* 👟 Asistencias
+
+</td>
+<td width="50%" valign="top">
+
+### 🛡️ Sistema
+
+* 🆔 ID permanente por `auth`
+* 📊 Estadísticas persistentes
+* 🐺 Sistema de clanes
+* 👑 Roles por `auth`
+* 🔐 Administración dinámica
+* 🔒 Team Lock
+* 🚫 Anti-AFK
+* 🛑 Anti-spam
+* 💬 Chat de equipo
+* 🐺 Chat de clan
+* 📡 Webhooks de Discord
+* 🎥 Replays `.hbr2`
+
+</td>
+</tr>
+</table>
+
+---
+
+# 🏆 Gana Sigue
+
+El sistema principal de competición de la sala.
+
+```text
+                    🏆 GANADOR
+                        │
+                        ▼
+                 ┌─────────────┐
+                 │   CANCHA    │
+                 └─────────────┘
+                        │
+                   permanece
+                        │
+                        ▼
+                 ┌─────────────┐
+                 │  SIGUIENTE  │
+                 │    COLA     │
+                 └─────────────┘
+```
+
+Cuando termina un partido:
+
+1. 🏆 El ganador permanece.
+2. 👥 El equipo derrotado pasa a espectadores.
+3. ⏭️ Entran los siguientes jugadores.
+4. 🎲 Se prepara la nueva alineación.
+5. 📊 Se genera el resumen del partido.
+6. ▶️ Comienza automáticamente la siguiente ronda.
+
+El tamaño de los equipos se adapta a los jugadores disponibles en lugar de forzar siempre un 4v4.
+
+---
+
+# 🎯 Mecánicas
+
+Las habilidades utilizan letras individuales para mantener el sistema rápido durante el partido:
+
+|   Input   | Mecánica       |
+| :-------: | :------------- |
+|    `c`    | 🌀 Curva       |
+|    `l`    | 🏹 Lob-shot    |
+| `p` / `s` | 💥 Power recto |
+|    `n`    | ⚽ Normal       |
+
+Las habilidades disponen de un sistema visual de carga basado en elementos del mapa y estados internos del jugador.
+
+### 🥅 Travesaño
+
+Los segmentos especiales del mapa permiten que el balón atraviese normalmente el travesaño, pero interactúe con él durante un **lob-shot elevado**.
+
+Esto permite simular una diferencia entre un balón normal y un disparo elevado.
+
+---
+
+# 📊 Estadísticas
+
+Una de las partes centrales de sd-host es su sistema de persistencia.
+
+En lugar de identificar a un jugador únicamente por su nickname, el host utiliza:
+
+```js
+player.auth
+```
+
+como identidad principal.
+
+Esto permite conservar la información aunque el jugador:
+
+* cambie de nombre;
+* se desconecte;
+* vuelva a entrar;
+* reinicie la sala.
+
+### 🆔 Player ID
+
+Cada cuenta recibe un ID permanente:
+
+```text
+[001] Player
+[002] Player
+[003] Player
+```
+
+Ese ID también puede utilizarse en comandos administrativos:
+
+```text
+!kick 42
+```
+
+en lugar de:
+
+```text
+!kick NombreDelJugador
+```
+
+### 📈 Datos persistentes
+
+```text
+stats.json
+│
+├── player ID
+├── goals
+└── assists
+```
+
+Las estadísticas se guardan automáticamente y sobreviven a los reinicios del host.
+
+---
+
+# 🐺 Clanes
+
+Los jugadores pueden crear sus propios clanes y competir mediante un ranking global.
+
+### Crear
+
+```text
+!clan crear <TAG> <#COLOR> <EMOJI> <Nombre>
+```
+
+Actualmente se requieren **30 goles + asistencias históricas** para poder fundar un clan.
+
+### Comandos
+
+```text
+!clan crear <TAG> <#COLOR> <EMOJI> <Nombre>
+
+!clan invitar <jugador | [ID]>
+
+!clan aceptar
+
+!clan rechazar
+
+!clan salir
+
+!clan [TAG]
+
+!top clan
+```
+
+Las invitaciones tienen una duración de **2 minutos** y únicamente el fundador puede enviar invitaciones.
+
+Si un clan queda sin miembros, se disuelve automáticamente.
+
+### 🏅 Ranking
+
+```text
+!top clan
+```
+
+El ranking utiliza los **goles + asistencias** acumulados por los miembros.
+
+---
+
+# 👑 Roles y administración
+
+sd-host separa los privilegios internos del bot de la administración real de HaxBall.
+
+## 🛡️ Administradores
+
+```text
+admins.json
+```
+
+Contiene las `auth` con administración real de HaxBall.
+
+Los cambios se detectan automáticamente sin necesidad de reiniciar la sala.
+
+## ⭐ Roles
+
+```text
+roles.json
+```
+
+Roles disponibles:
+
+```text
+VIP
+VIP_PLUS
+MOD
+MASTER
+```
+
+Los roles internos son independientes de la administración real.
+
+Esto permite tener, por ejemplo:
+
+```text
+👑 Admin HaxBall
+⭐ MASTER
+⭐ MOD
+⭐ VIP_PLUS
+⭐ VIP
+```
+
+sin mezclar los dos sistemas de permisos.
+
+---
+
+# 🔒 Seguridad de la sala
+
+### Team Lock
+
+Los jugadores no pueden modificar manualmente sus equipos.
+
+El sistema combina:
+
+```js
+room.lockTeams()
+```
+
+con comprobaciones en:
+
+```text
+onPlayerTeamChange
+onTeamsLockChange
+```
+
+Si un administrador desbloquea los equipos manualmente, el host vuelve a bloquearlos.
+
+### 🚫 Anti-AFK
+
+Durante una partida:
+
+```text
+15s sin cambiar input
+        ↓
+      KICK
+```
+
+Solo afecta a jugadores dentro de la cancha.
+
+Los espectadores y administradores están excluidos.
+
+### 🛑 Anti-spam
+
+```text
+4 mensajes / 5 segundos
+            ↓
+        SLOW MODE
+            ↓
+1 mensaje / minuto durante 5 minutos
+```
+
+Los administradores están exentos.
+
+---
+
+# 💬 Chat
+
+El sistema de chat utiliza una identidad centralizada:
+
+```text
+[ID] {emoji} Nombre: mensaje
+```
+
+Los jugadores sin clan utilizan el emoji de su camiseta.
+
+Los jugadores con clan utilizan:
+
+```text
+{emoji}[TAG]
+```
+
+con el color correspondiente al clan.
+
+### 💬 Chat de equipo
+
+```text
+t <mensaje>
+```
+
+### 🐺 Chat de clan
+
+```text
+tc <mensaje>
+```
+
+El chat de clan únicamente se muestra a los miembros conectados del mismo clan.
+
+---
+
+# ⚽ Sistema de goles
+
+Cada gol es procesado para obtener información adicional:
+
+```text
+⚽ Goleador
+👟 Asistencia
+🚫 Autogol
+🚀 Velocidad
+📏 Distancia
+🪵 Palo
+🧤 Atajada
+🔥 Doblete
+🏆 Hat-trick
+```
+
+El sistema también mantiene estadísticas independientes para:
+
+```text
+Sesión
+   │
+   ├── Goles
+   └── Asistencias
+
+Partido
+   │
+   ├── Goles
+   └── Asistencias
+
+Equipo
+   │
+   └── Toques / posesión
+```
+
+---
+
+# 🐺 Avatares dinámicos
+
+El avatar del jugador puede cambiar temporalmente dependiendo de la acción realizada.
+
+```text
+💬 Chat
+   ↓
+⚽ Gol
+   ↓
+👟 Asistencia
+   ↓
+🧤 Atajada
+   ↓
+🏆 Celebración
+```
+
+También existe una jerarquía de prioridad:
+
+```text
+🐺 Líder de la Manada
+        ↓
+🆕 Primera vez en el host
+        ↓
+🙂 Avatar normal
+```
+
+El 🐺 es el símbolo principal de identidad del host.
+
+---
+
+# 🏆 Match Summary
+
+Al finalizar cada partido se genera un banner compacto con información del encuentro.
+
+```text
+🏆 Ganó 🔴 Rojo (3-1)
+
+🐺 🔥3 ・ ⏱️07:42 ・ ⚽4 ・
+🥇P1 2⚽1🅰️ - 🥈P2 1⚽
+
+🐺 📊 🔴62% [██████░░░░] 38%🔵
+
+🐺 🔲P1, P2 𝔳𝔰 🦉P3, P4
+```
+
+Puede incluir:
+
+* Resultado.
+* Duración.
+* Goles.
+* Asistencias.
+* Jugadores destacados.
+* Posesión.
+* Próxima alineación.
+
+El sistema genera las camisetas del siguiente partido antes de construir el banner para mostrar la identidad correcta de cada jugador.
+
+---
+
+# 💬 Comandos
+
+### 👤 Player
+
+```text
+!help
+!me
+!stats
+!top
+!top clan
+```
+
+### 🐺 Clan
+
+```text
+!clan crear ...
+!clan invitar ...
+!clan aceptar
+!clan rechazar
+!clan salir
+!clan [TAG]
+```
+
+### 🛡️ Admin
+
+```text
+!helpadmin
+
+!mover
+!kick
+!ban
+...
+```
+
+Los comandos administrativos aceptan tanto nombres como IDs permanentes.
+
+---
+
+# 📡 Discord
+
+sd-host puede conectarse con Discord mediante **webhooks**.
+
+### 🚀 Sala abierta
+
+Envía una notificación cuando la sala comienza.
+
+### 🏆 Resultado
+
+Al terminar un partido puede enviar:
+
+```text
+Resultado
+Estadísticas
+Información del partido
+Replay .hbr2
+```
+
+### 🆘 Llamar administrador
+
+Desde HaxBall:
+
+```text
+!llamaradmin <razón>
+```
+
+El aviso aparece en la sala y puede enviarse automáticamente a Discord.
+
+---
+
+# 📁 Estructura
+
+```text
+sd-host/
+│
+├── 🐺 sd-host.js
+│
+├── 🗺️ fx4.hbs
+│
+├── ⚙️ package.json
+├── 🔐 .env
+├── 📄 .env.example
+│
+├── 👑 admins.json
+├── ⭐ roles.json
+│
+├── 📊 stats.json
+├── 🐺 clans.json
+│
+├── 📜 LICENSE
+└── 📖 README.md
+```
+
+### Archivos
+
+| Archivo       | Descripción                   | Se modifica |
+| :------------ | :---------------------------- | :---------: |
+| `sd-host.js`  | Núcleo completo del host      |      👤     |
+| `fx4.hbs`     | Estadio utilizado por la sala |      👤     |
+| `admins.json` | Auths con admin real          |      👤     |
+| `roles.json`  | Roles internos                |      👤     |
+| `stats.json`  | Stats e IDs permanentes       |      🤖     |
+| `clans.json`  | Clanes y miembros             |      🤖     |
+| `.env`        | Configuración sensible        |      👤     |
+
+Los archivos de datos generados por el bot no deberían subirse al repositorio público.
+
+---
+
+# 🚀 Instalación
+
+### 1. Clonar
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd sd-host
+```
+
+### 2. Instalar dependencias
+
+```bash
+npm install
+```
+
+### 3. Configurar entorno
+
+```bash
+cp .env.example .env
+```
+
+### 4. Añadir Headless Token
+
+Obtén tu token desde:
+
+```text
+https://www.haxball.com/headlesstoken
+```
+
+### 5. Iniciar
 
 ```bash
 node --env-file=.env sd-host.js TU_HEADLESS_TOKEN
 ```
 
-Sin `.env` también arranca — los webhooks de Discord simplemente no mandan
-nada si no están seteados, y el código de `!claim` se genera al azar y se
-muestra en la consola.
+Node.js **20.6+** es requerido para utilizar `--env-file` de forma nativa.
 
-Para producción, con [`pm2`](https://pm2.keymetrics.io/) así se reinicia solo
-si se cae:
+---
+
+# ⚡ Producción
+
+Para mantener la sala activa se recomienda **PM2**.
 
 ```bash
-pm2 start sd-host.js --name sd-room --node-args="--env-file=.env" -- TU_TOKEN
+pm2 start sd-host.js \
+  --name sd-room \
+  --node-args="--env-file=.env" \
+  -- TU_HEADLESS_TOKEN
 ```
 
-## Configuración
+Guardar el proceso:
 
-Todo lo importante está como variable de entorno (`.env`, ver `.env.example`)
-o como archivo `.json` en la misma carpeta:
+```bash
+pm2 save
+```
 
-| Archivo | Qué es | Se edita |
-|---|---|---|
-| `admins.json` | Auths con admin real de HaxBall | A mano, se recarga solo |
-| `roles.json` | Auths con rol VIP/VIP_PLUS/MOD/MASTER | A mano, se recarga solo |
-| `stats.json` | Goles/asistencias/ID por jugador | Lo escribe el bot |
-| `clans.json` | Clanes y sus miembros | Lo escribe el bot |
-| `fx4.hbs` | Mapa del estadio | — |
+Ver estado:
 
-Ninguno de estos cuatro `.json` de datos se sube al repo (están en
-`.gitignore`) — cada instancia del bot tiene los suyos.
+```bash
+pm2 status
+```
 
-## Comandos
+Ver logs:
 
-Escribí `!help` en el chat de la sala para la lista completa (jugadores) y
-`!helpadmin` para los de administración. Algunos destacados:
+```bash
+pm2 logs sd-room
+```
 
-- `t <mensaje>` — chat de equipo. `tc <mensaje>` — chat de clan.
-- `!me` / `!stats` / `!top` — tus stats. `!top clan` — ranking de clanes.
-- `!clan crear <TAG> <#COLOR> <EMOJI> <Nombre>` — fundar un clan.
-- `!llamaradmin <razón>` — avisa en la sala y manda un webhook a Discord.
-- `!mover`, `!kick`, `!ban`, etc. (admin) — aceptan nombre o `[ID]` del chat.
+PM2 permite que el proceso vuelva a levantarse automáticamente si el host se cae.
 
-## Cambiar de mapa
+---
 
-Si usás un `.hbs` distinto a `fx4.hbs`, hay varios IDs que están hardcodeados
-para ESE mapa específico y hay que recalcular:
+# 🗺️ Mapas
 
-- `currentStartDisc` / `currentStartDiscL` — discos de la barra de carga de
-  curva/lob-shot.
-- Los índices de segmento del travesaño (buscar `"_comment": "travesano"` en
-  el `.hbs`, contar la posición en el array `segments`, no el ID de vértice).
-- `POST_DISCS` — discos de los postes, para la detección de "¡AL PALO!".
+El mapa utilizado actualmente es:
 
-## Licencia
+```text
+fx4.hbs
+```
 
-[GPL-3.0](./LICENSE) — copyleft. Podés usar, modificar y redistribuir este
-código libremente, pero cualquier trabajo derivado que distribuyas tiene que
-mantenerse bajo la misma licencia y con el código fuente disponible.
+Al cambiar el estadio es necesario revisar determinados índices específicos del mapa.
 
-Basado en un script original de BUGGYRAZ.
+Entre ellos:
+
+```text
+currentStartDisc
+currentStartDiscL
+POST_DISCS
+```
+
+y los segmentos correspondientes al travesaño.
+
+Estos valores dependen de la estructura interna del `.hbs`, por lo que **no deben copiarse directamente de `fx4.hbs` a otro mapa**.
+
+---
+
+# 🧠 Arquitectura
+
+Aunque el proyecto utiliza un único archivo principal, internamente está dividido por sistemas:
+
+```text
+                         ┌──────────────────┐
+                         │    sd-host.js    │
+                         └────────┬─────────┘
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+          ▼                       ▼                       ▼
+     GAMEPLAY                 PLAYERS                  SOCIAL
+          │                       │                       │
+   ┌──────┼──────┐          ┌─────┼─────┐          ┌─────┼─────┐
+   │      │      │          │     │     │          │     │     │
+  Goals  Skills Teams      Stats Auth Roles       Clan Discord Chat
+   │      │      │          │     │     │          │     │     │
+   └──────┴──────┘          └─────┴─────┘          └─────┴─────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │ Persistent JSON │
+                         └─────────────────┘
+```
+
+El proyecto mantiene toda la lógica en `sd-host.js`, actualmente con varios miles de líneas, mientras los datos persistentes se separan en archivos JSON.
+
+---
+
+# ⚠️ Notas para desarrolladores
+
+`node-haxball` tiene diferencias importantes respecto a la API Headless oficial del navegador.
+
+### Estado asíncrono
+
+Operaciones como:
+
+```js
+room.setPlayerTeam(...)
+```
+
+no necesariamente actualizan el estado inmediatamente dentro del mismo tick.
+
+Por eso el proyecto utiliza snapshots y planes de cambios antes de aplicar modificaciones.
+
+### `fs.watch`
+
+Los archivos editados manualmente utilizan `fs.watchFile` debido a cómo algunos editores reemplazan el archivo original al guardar.
+
+### Resultado del partido
+
+`onGameStop` puede resetear información del partido.
+
+Por eso el resultado final debe capturarse antes de llamar a `stopGame()`.
+
+---
+
+# 🗺️ Roadmap
+
+* [x] 🏆 Gana Sigue
+* [x] ⚽ Sistema de goles
+* [x] 👟 Asistencias
+* [x] 📊 Estadísticas persistentes
+* [x] 🆔 IDs permanentes
+* [x] 🐺 Clanes
+* [x] 👑 Roles
+* [x] 🔒 Team Lock
+* [x] 🚫 Anti-AFK
+* [x] 🛑 Anti-spam
+* [x] 💬 Chat de equipo
+* [x] 🐺 Chat de clan
+* [x] 📡 Webhooks de Discord
+* [x] 🎥 Replays `.hbr2`
+* [x] 🧤 Detección de atajadas
+* [x] 🪵 Detección de palo
+* [x] 🎨 Avatares dinámicos
+* [ ] 🔧 Refactorización modular
+* [ ] 🧪 Sistema de tests
+* [ ] 📈 Métricas avanzadas
+* [ ] 🌐 Panel web de administración
+
+---
+
+# 📜 Licencia
+
+Este proyecto está distribuido bajo la licencia **GPL-3.0**.
+
+Puedes utilizar, modificar y redistribuir el código siempre que las obras derivadas distribuidas mantengan la misma licencia y el código fuente correspondiente.
+
+---
+
+<div align="center">
+
+## 🐺 sd-host
+
+**Futsal. Stats. Competition.**
+
+<br/>
+
+Hecho con ❤️ para HaxBall.
+
+<br/>
+
+**© sd-host**
+
+</div>
