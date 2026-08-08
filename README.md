@@ -602,7 +602,7 @@ Los archivos de datos generados por el bot no deberían subirse al repositorio p
 
 ```bash
 git clone https://github.com/mo0negtt/Street-District
-cd Street-District-main
+cd Street-District
 ```
 
 ### 2. Instalar dependencias
